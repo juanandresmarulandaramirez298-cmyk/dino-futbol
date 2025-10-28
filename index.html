@@ -154,6 +154,7 @@
       dino = document.querySelector(".dino");
       gameOver = document.querySelector(".game-over");
       document.addEventListener("keydown", HandleKeyDown);
+      document.addEventListener("touchstart", HandleTouchStart);
       setInterval(() => {
         if (!parado) crearObstaculo();
       }, 2000);
@@ -161,6 +162,10 @@
 
     function HandleKeyDown(ev) {
       if (ev.keyCode === 32) saltar();
+    }
+
+    function HandleTouchStart(ev){
+      saltar();
     }
 
     function saltar() {
