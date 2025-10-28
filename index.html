@@ -14,7 +14,7 @@
     }
     .contenedor {
       width: 920px;
-      height: 300px;
+      height: 320px;
       margin: 0 auto;
       position: relative;
       background: url(img/estadio.png) repeat-x;
@@ -49,8 +49,8 @@
     }
     .score {
       position: absolute;
-      top: 5px;
-      left: 10px;
+      top: 20px;
+      left: 20px;
       color: #032203;
       font-family: verdana;
       font-size: 30px;
@@ -77,10 +77,15 @@
       border-radius: 50%;
       cursor: pointer;
       margin-top: 20px;
+      animation: rebote 1s infinite;
       transition: transform 0.2s ease;
     }
     .boton-balon:hover {
       transform: scale(1.1);
+    }
+    @keyframes rebote {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
     .obstaculo {
       width: 100px;
@@ -94,24 +99,6 @@
       from { background-position-x: -84px; }
       to { background-position-x: -252px; }
     }
-    @keyframes rebote {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.boton-balon {
-  width: 80px;
-  height: 80px;
-  background: url('img/balonbueno.png') no-repeat center center;
-  background-size: cover;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  margin-top: 20px;
-  animation: rebote 1s infinite;
-  transition: transform 0.2s ease;
-}
-
   </style>
 </head>
 <body>
@@ -157,7 +144,7 @@
     let dinoPostY = sueloY;
     let sueloX = 0;
     const VelEscenario = 1280 / 3;
-    const gameVel = 1;
+    let gameVel = 1;
     let score = 0;
     let saltando = false;
     let parado = false;
@@ -244,6 +231,11 @@
           score++;
           textoScore.innerText = score;
           obs.puntajeSumado = true;
+
+          // Aumentar velocidad cada 5 puntos
+          if (score % 5 === 0) {
+            gameVel += 0.5;
+          }
         }
 
         if (left < -50) {
@@ -274,8 +266,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
